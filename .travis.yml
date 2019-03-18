@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run fredyball/docker-django python manage.py test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "django"
+  env: "Django-env"
+  bucket_name: "elasticbeanstalk-us-east-2-501271447927"
+  bucket_path: "django"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
